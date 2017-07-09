@@ -1,8 +1,8 @@
-FROM shuaicj/spark
+FROM shuaicj/spark:2.1.1
 MAINTAINER shuaicj <shuaicj@gmail.com>
 
-RUN cd ${SPARK_HOME}/conf && \
-    cp spark-env.sh.template spark-env.sh && \
-    printf "\n\nSPARK_MASTER_WEBUI_PORT=8080\n" >> spark-env.sh
+ADD start-spark-master.sh /sbin/
 
-EXPOSE 4040 6066 7077 7337 8080 9000
+EXPOSE 6066 7077 8080
+
+ENTRYPOINT ["/sbin/start-spark-master.sh"]
